@@ -28,7 +28,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "arkaPlan")!)
     }
 
@@ -86,21 +85,31 @@ class ViewController: UIViewController {
     
     
     func generateValue(){
-        let zar1 = arc4random_uniform(6) + 1
-        let zar2 = arc4random_uniform(6) + 1
         
-        imgZar1.image = UIImage(named: String(zar1))
-        imgZar2.image = UIImage(named: String(zar2))
-        
-        setResult(zar1: Int(zar1), zar2: Int(zar2))
-        
-        if nowStatus > maxStatus{
-            if gamerScore.firstGamerScore > gamerScore.secondGamerScore{
-                lblResult.text = "Oyunu Birinic 1. Oyuncu Kazandı"
-            }else{
-                lblResult.text = "Oyunu İkinci 2. Oyuncu Kazandı"
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2){
+            
+            let zar1 = arc4random_uniform(6) + 1
+            let zar2 = arc4random_uniform(6) + 1
+            
+            self.imgZar1.image = UIImage(named: String(zar1))
+            self.imgZar2.image = UIImage(named: String(zar2))
+            
+            self.setResult(zar1: Int(zar1), zar2: Int(zar2))
+            
+            if self.nowStatus > self.maxStatus{
+                if self.gamerScore.firstGamerScore > self.gamerScore.secondGamerScore{
+                    self.lblResult.text = "Oyunu Birinic 1. Oyuncu Kazandı"
+                }else{
+                    self.lblResult.text = "Oyunu İkinci 2. Oyuncu Kazandı"
+                }
             }
+            
         }
+        lblResult.text = "\(gamerQueue). Oyunuc için Zar Değeri Üretiliyor"
+        imgZar1.image = UIImage(named: "bilinmeyenZar")
+        imgZar2.image = UIImage(named: "bilinmeyenZar")
+        
+       
         
     }
 }
