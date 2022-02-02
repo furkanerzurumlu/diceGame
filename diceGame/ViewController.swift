@@ -33,6 +33,11 @@ class ViewController: UIViewController {
     }
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if nowStatus > maxStatus{
+            
+            return
+        }
+        
         generateValue()
     }
     
@@ -88,6 +93,15 @@ class ViewController: UIViewController {
         imgZar2.image = UIImage(named: String(zar2))
         
         setResult(zar1: Int(zar1), zar2: Int(zar2))
+        
+        if nowStatus > maxStatus{
+            if gamerScore.firstGamerScore > gamerScore.secondGamerScore{
+                lblResult.text = "Oyunu Birinic 1. Oyuncu Kazandı"
+            }else{
+                lblResult.text = "Oyunu İkinci 2. Oyuncu Kazandı"
+            }
+        }
+        
     }
 }
 
